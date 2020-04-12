@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { register } from '../../apis/auth';
+import AppContext from '../../AppContext';
 export default () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { API } = useContext(AppContext);
   const submit = async data => {
     try {
-      let resp = await register(data);
-      alert(resp.msg)
+      let resp = await API.Auth.register(data);
+      alert(resp.msg);
     } catch (error) {
       alert(error.msg);
     }
